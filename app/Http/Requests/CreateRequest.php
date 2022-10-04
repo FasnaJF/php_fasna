@@ -2,29 +2,26 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CreateRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, mixed>
-     */
     public function rules()
     {
         return [
-            //
+            'full_name' => 'required|string|max:255',
+            'email' => 'required|email|unique:representatives,email',
+            'telephone' => 'required|string|max:255',
+            'current_route' => 'required|string|max:255',
+            'joined_date' => 'required|date',
+            'comments' => 'max:1024',
         ];
     }
 }

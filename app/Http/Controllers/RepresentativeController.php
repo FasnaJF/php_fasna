@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateRequest;
 use App\Http\Requests\UpdateRequest;
 use App\Services\RepresentativeService;
-use Illuminate\Http\Request;
 
 class RepresentativeController extends Controller
 {
@@ -30,7 +29,7 @@ class RepresentativeController extends Controller
 
     public function store(CreateRequest $request)
     {
-        return $this->representativeService->createRepresentative($request);
+        return $this->representativeService->createRepresentative($request->validated());
     }
 
     public function show($id)
@@ -45,7 +44,7 @@ class RepresentativeController extends Controller
 
     public function update(UpdateRequest $request, $id)
     {
-        return $this->representativeService->updateRepresentative($id,$request);
+        return $this->representativeService->updateRepresentative($id,$request->validated());
     }
 
     public function destroy($id)

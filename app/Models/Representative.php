@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Representative extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['full_name','email','telephone','email','current_route','joined_date','comments'];
+
 }

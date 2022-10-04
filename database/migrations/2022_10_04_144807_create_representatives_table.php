@@ -19,7 +19,8 @@ return new class extends Migration
             $table->string('email');
             $table->string('telephone');
             $table->string('current_route');
-            $table->text('comments');
+            $table->timestamp('joined_date');
+            $table->text('comments')->nullable();
             $table->timestamps();
         });
     }

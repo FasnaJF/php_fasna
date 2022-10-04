@@ -13,6 +13,7 @@ class RepresentativeFactory extends Factory
             'email' => fake()->unique()->safeEmail(),
             'telephone' => fake()->phoneNumber(),
             'current_route' => fake()->city(),
+            'joined_date' => fake()->dateTime(),
             'comments' => fake()->paragraph(3),
         ];
     }
