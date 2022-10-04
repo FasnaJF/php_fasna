@@ -29,7 +29,9 @@ class RepresentativeController extends Controller
 
     public function store(CreateRequest $request)
     {
-        return $this->representativeService->createRepresentative($request->validated());
+        $this->representativeService->createRepresentative($request->validated());
+        return redirect()->route('representatives.index')
+            ->with('success','Representative created successfully.');
     }
 
     public function show($id)
@@ -39,16 +41,22 @@ class RepresentativeController extends Controller
 
     public function edit($id)
     {
-        return $this->representativeService->getRepresentativeById($id);
+        $representative = $this->representativeService->getRepresentativeById($id);
+        return view('representatives.edit',compact('representative'));
+
     }
 
     public function update(UpdateRequest $request, $id)
     {
-        return $this->representativeService->updateRepresentative($id,$request->validated());
+        $this->representativeService->updateRepresentative($id,$request->validated());
+        return redirect()->route('representatives.index')
+            ->with('success','Representative updated successfully.');
     }
 
     public function destroy($id)
     {
-        return $this->representativeService->deleteRepresentative($id);
+        $this->representativeService->deleteRepresentative($id);
+        return redirect()->route('representatives.index')
+            ->with('success','Representative deleted successfully.');
     }
 }

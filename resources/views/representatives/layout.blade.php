@@ -95,34 +95,60 @@
             $('#popupRepresentative').modal('show');
         });
 
-        $('#saveBtn').click(function (e){
-            e.preventDefault();
-            $(this).html('Sending..');
+        {{--$('#saveBtn').click(function (e){--}}
+        {{--    e.preventDefault();--}}
+        {{--    $(this).html('Sending..');--}}
 
-            if($(this).val() === 'create'){
-                $.ajax({
-                    data: $('#representativeForm').serialize(),
-                    url: "{{ route('representatives.store') }}",
-                    type: "POST",
-                    dataType: 'json',
-                    success: function (data) {
+        {{--    if($(this).val() === 'create'){--}}
+        {{--        $.ajax({--}}
+        {{--            data: $('#representativeForm').serialize(),--}}
+        {{--            url: "{{ route('representatives.store') }}",--}}
+        {{--            type: "POST",--}}
+        {{--            dataType: 'json',--}}
+        {{--            success: function (data) {--}}
 
-                        $('#representativeForm').trigger("reset");
-                        $('#createRepresentative').modal('hide');
-                        location.reload();
-                    },
-                    error: function (data) {
-                        var response = (JSON.parse(data.responseText));
-                        $.each( response.errors, function( key, value) {
-                            $('#error').text(value[0]);
-                        });
-                        $('#saveBtn').html('Create Representative');
-                    }
-                });
-            }else{
-                alert('update');
-            }
+        {{--                $('#representativeForm').trigger("reset");--}}
+        {{--                $('#createRepresentative').modal('hide');--}}
+        {{--                location.reload();--}}
+        {{--            },--}}
+        {{--            error: function (data) {--}}
+        {{--                var response = (JSON.parse(data.responseText));--}}
+        {{--                $.each( response.errors, function( key, value) {--}}
+        {{--                    $('#error').text(value[0]);--}}
+        {{--                });--}}
+        {{--                $('#saveBtn').html('Create Representative');--}}
+        {{--            }--}}
+        {{--        });--}}
+        {{--    }--}}
 
+        {{--});--}}
+
+        $('.show').click(function (){
+            const id = $(this).data('id');
+            let url = "{{route('representatives.show', ':id')}}";
+            url = url.replace(':id', id);
+            $.ajax({
+                url: url,
+                type: "GET",
+                success: function (data) {
+                    $('#saveBtn').hide();
+                    $('#id').val(data.id);
+                    $('#full_name').val(data.full_name);
+                    $('#email').val(data.email);
+                    $('#telephone').val(data.telephone);
+                    $('#joined_date').val(data.joined_date.split(" ")[0]);
+                    $('#current_route').val(data.current_route);
+                    $('#comments').val(data.comments);
+                    $('#modelHeading').html(data.full_name);
+                    $('#popupRepresentative').modal('show');
+                },
+                error: function (data) {
+                    var response = (JSON.parse(data.responseText));
+                    $.each( response.errors, function( key, value) {
+                        $('#error').text(value[0]);
+                    });
+                }
+            });
         })
 
 

@@ -7,7 +7,7 @@
                 <h2>Sales Team</h2>
             </div>
             <div class="pull-right" style="float: right;margin-bottom: 15px;">
-                <a class="btn btn-success" href="javascript:void(0)" id="createRepresentative"> Add New</a>
+                <a class="btn btn-success" href="{{ route('representatives.create')}}"> Add New</a>
             </div>
         </div>
     </div>
@@ -35,13 +35,15 @@
                 <td>{{ $representative->telephone }}</td>
                 <td>{{ $representative->current_route }}</td>
                 <td>
+                    <form action="{{ route('representatives.destroy',$representative->id) }}" method="POST">
+                        <a class="btn btn-primary show" data-id={{$representative->id}} href="javascript:void(0)"
+                           id="showDetails">Show</a>
 
-                    <a class="btn btn-primary" href="javascript:void(0)" id="showDetails">Show</a>
-
-                    <a class="btn btn-warning" href="javascript:void(0)" id="editDetails">Edit</a>
-
-                    <a class="btn btn-danger" href="{{ route('representatives.destroy',$representative->id) }}">Delete</a>
-
+                        <a class="btn btn-warning edit" href="{{ route('representatives.edit',$representative->id) }}">Edit</a>
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
                 </td>
             </tr>
         @endforeach
