@@ -2,39 +2,39 @@
 
 namespace App\Services;
 
-use App\Repositories\ProductRepository\ProductRepositoryInterface;
+use App\Repositories\RepresentativeRepository\RepresentativeRepositoryInterface;
 
 class RepresentativeService
 {
-    private ProductRepositoryInterface $productRepo;
+    private RepresentativeRepositoryInterface $representativeRepository;
 
-    public function __construct(ProductRepositoryInterface $productRepo)
+    public function __construct(RepresentativeRepositoryInterface $representativeRepository)
     {
-        $this->productRepo = $productRepo;
+        $this->representativeRepository = $representativeRepository;
     }
 
-    public function getProductById($id)
+    public function getRepresentativeById($id)
     {
-        return $this->productRepo->getById($id);
+        return $this->representativeRepository->getById($id);
     }
 
-    public function createProduct($data)
+    public function createRepresentative($data)
     {
-        return $this->productRepo->create($data);
+        return $this->representativeRepository->create($data);
     }
 
-    public function deleteProduct($id)
+    public function deleteRepresentative($id)
     {
-        return $this->productRepo->deleteById($id);
+        return $this->representativeRepository->deleteById($id);
     }
 
-    public function updateProduct($id, $data)
+    public function updateRepresentative($id, $data)
     {
-        return $this->productRepo->updateById($id, $data);
+        return $this->representativeRepository->updateById($id, $data);
     }
 
-    public function getAllProducts($request)
+    public function getAllRepresentatives()
     {
-        return $this->productRepo->getAll($request);
+        return $this->representativeRepository->getAll();
     }
 }

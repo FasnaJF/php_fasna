@@ -10,7 +10,7 @@ interface BaseRepositoryInterface
 
     public function getById($id);
 
-    public function getAll($sortBy = null);
+    public function getAll();
 
     public function deleteById($id);
 

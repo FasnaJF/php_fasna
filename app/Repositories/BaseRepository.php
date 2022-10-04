@@ -25,11 +25,8 @@ abstract class BaseRepository
         return $this->model->find($id);
     }
 
-    public function getAll($sortBy = null)
+    public function getAll()
     {
-        if (isset($sortBy)) {
-            return $this->model->all()->sortBy($sortBy);
-        }
         return $this->model->all();
     }
 
